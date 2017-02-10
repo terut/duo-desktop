@@ -1,0 +1,54 @@
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+}
+ul {
+  list-style: none;
+}
+#container {
+  display: flex;
+}
+#sections {
+  width: 170px;
+}
+#section {
+  background-color: #fcfcfc;
+}
+.list li{
+  padding: 10px 0;
+}
+.title {
+  font-size: 18px;
+  margin: 10px 0;
+}
+.sentence {
+  padding: 10px;
+}
+.sentence .jp {
+	display: flex;
+}
+.sentence .jp div {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px
+  border: 1px solid #ececec;
+}
+.sentence .jp p {
+	margin: 0;
+}
+.sentence .en {
+  min-height: 38px;
+}
+.sentence textarea {
+	width: 100%;
+  resize: none;
+}
+.valid {
+  color: green;
+}
+.invalid {
+  color: red;
+}
