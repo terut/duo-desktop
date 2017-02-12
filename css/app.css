@@ -4,40 +4,49 @@ html {
 body {
   height: 100%;
   margin: 0;
+  color: #333;
 }
 ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 #container {
-  display: flex;
+  display: -webkit-flex;
 }
 #sections {
   width: 170px;
+  background: #59bb0c;
+  color: #f6f6f6;
 }
 #section {
-  background-color: #fcfcfc;
+  -webkit-flex: 1;
+  background-color: #f6f6f6;
+  padding: 10px 30px;
 }
 .list li{
   padding: 10px 0;
+  text-align: center;
+}
+.list li:hover, .list .selected {
+  background-color: #4ea30a;
 }
 .title {
   font-size: 18px;
-  margin: 10px 0;
 }
 .sentence {
-  padding: 10px;
+  padding: 15px 0;
 }
 .sentence .jp {
-	display: flex;
+  display: -webkit-flex;
+	margin: 0;
 }
 .sentence .jp div {
-  width: 30px;
-  height: 30px;
-  border-radius: 10px
-  border: 1px solid #ececec;
+  margin-top: 1px;
 }
 .sentence .jp p {
-	margin: 0;
+  margin: 0px;
+  margin-left: 5px;
 }
 .sentence .en {
   min-height: 38px;
@@ -45,6 +54,9 @@ ul {
 .sentence textarea {
 	width: 100%;
   resize: none;
+}
+.actions button{
+  margin-right: 10px;
 }
 .valid {
   color: green;

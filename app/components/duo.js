@@ -19,7 +19,8 @@ export default class Duo extends React.Component {
 
   _sectionView() {
     const list = this.sections.map((s, i) => {
-      return <li key={i} onClick={() => this._handleClick(i) }>Section {s.section}</li>
+      const selected = this.state.selectedSection == i
+      return <li key={i} onClick={() => this._handleClick(i) }  className={selected ? "selected" : ""}>Section {s.section}</li>
     })
     return <ul className="list">{list}</ul>
   }
@@ -27,7 +28,7 @@ export default class Duo extends React.Component {
   _sentenceView() {
     const list = this.sections[this.state.selectedSection].sentences.map((s, i) => {
       return (
-        <li key={i} className="sentence">
+        <li key={i} className="sentence" >
           <Sentence sentence={s} />
         </li>
       )

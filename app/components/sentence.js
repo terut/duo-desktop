@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import * as JsDiff from 'diff'
 
 export default class Sentence extends React.Component {
   constructor() {
     super()
+    this._clearCache()
     this.state = {
-      checked: false,
-      valid: false,
+      diff: null,
       input: ""
     }
   }
@@ -20,11 +21,16 @@ export default class Sentence extends React.Component {
     source.src = "./assets/sounds/s" + fileNumber + ".m4a"
     audio.load()
 
-    this.setState({
-      checked: false,
-      valid: false,
-      input: ""
-    })
+    this._handleClear()
+  }
+
+  _handleClear() {
+    this._clearCache()
+    this.setState({ diff: null, input: "" })
+  }
+
+  _clearCache() {
+    this.cachedText = null
   }
 
   _handleChange(e) {
@@ -32,12 +38,34 @@ export default class Sentence extends React.Component {
   }
 
   _handleCheck() {
-    var valid = this.props.sentence.en == this.state.input
-    this.setState({ checked: true, valid: valid })
+    const diff = JsDiff.diffWords(this.state.input, this.props.sentence.en)
+    this._clearCache()
+    this.setState({ diff: diff })
 	}
 
-  _handleClear() {
-    this.setState({ checked: false, valid: false, input: "" })
+  _showEn() {
+    if(!this.state.diff) {
+      return ""
+    }
+
+    if(this.state.diff.isEmpty) {
+      return this.props.sentence.en
+    }
+
+    if(this.cachedText) {
+      return this.cachedText
+    }
+
+    this.cachedText = this.state.diff.map((part, i) => {
+      if(part.removed) {
+        return
+      }
+      if(part.added) {
+        return <span key={i} className="invalid">{part.value}</span>
+      }
+      return part.value
+    })
+    return this.cachedText
   }
 
   render() {
@@ -45,15 +73,15 @@ export default class Sentence extends React.Component {
     return (
       <div>
         <div className="jp">
-          <div>{this.props.sentence.number}</div>
+          <div>{this.props.sentence.number}.</div>
           <p>{this.props.sentence.jp}</p>
         </div>
         <audio controls preload="auto">
           <source src={`./assets/sounds/s${fileNumber}.m4a`} type="audio/mp4" />
         </audio>
-        <p className={`en ${this.state.valid ? 'valid' : 'invalid' }`}>{this.state.checked ? this.props.sentence.en : ""}</p>
+        <p className="en valid">{this._showEn()}</p>
         <textarea value={this.state.input} onChange={(e) => this._handleChange(e)} />
-        <div>
+        <div className="actions">
           <button onClick={() => this._handleCheck()}>Check</button>
           <button onClick={() => this._handleClear()}>Clear</button>
         </div>
