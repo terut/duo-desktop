@@ -16,12 +16,19 @@ ul {
 }
 #sections {
   width: 170px;
+  height: 100vh;
   background: #59bb0c;
   color: #f6f6f6;
+  position: fixed;
+  overflow: auto;
+}
+#sections::-webkit-scrollbar {
+  display: none;
 }
 #section {
   -webkit-flex: 1;
   background-color: #f6f6f6;
+  margin-left: 170px;
   padding: 10px 30px;
 }
 .list li{
@@ -43,6 +50,9 @@ ul {
 }
 .sentence .jp div {
   margin-top: 1px;
+}
+.marked {
+  color: #337ab7;
 }
 .sentence .jp p {
   margin: 0px;
