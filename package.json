@@ -1,6 +1,6 @@
 {
   "name": "duo-desktop",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "main.js",
   "scripts": {
     "dev:dist": "rollup -wm -c build/dev.config.js",
