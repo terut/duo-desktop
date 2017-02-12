@@ -5,7 +5,7 @@
   "scripts": {
     "dev:dist": "rollup -wm -c build/dev.config.js",
     "build": "rollup -m -c build/dist.config.js",
-    "release": "electron-packager . duo --platform=darwin,linux --arch=x64 --ignore='node_modules' --overwrite"
+    "release": "electron-packager . duo --platform=darwin,linux --arch=x64 --ignore='(node_modules|assets_exmaple)' --overwrite"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
