@@ -15,6 +15,7 @@
     "diff": "^3.2.0",
     "electron": "^1.4.15",
     "electron-packager": "^8.5.1",
+    "immutable": "^3.8.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "rollup": "^0.41.4",

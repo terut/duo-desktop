@@ -84,6 +84,7 @@ export default class Sentence extends React.Component {
         <div className="actions">
           <button onClick={() => this._handleCheck()}>Check</button>
           <button onClick={() => this._handleClear()}>Clear</button>
+          <button className={this.props.marked ? "marked" : ""} onClick={() => this.props.onMarked(this.props.sentence)}>Mark</button>
         </div>
       </div>
     )}

@@ -1,4 +1,5 @@
 import React from 'react'
+import Immutable from 'immutable'
 import Sentence from './sentence'
 import jsondata from '../../assets/sentences.json'
 
@@ -7,7 +8,14 @@ export default class Duo extends React.Component {
     super()
     this.sections = jsondata
     this.state = {
+      markedSentences: Immutable.Map(),
       selectedSection: 0
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(this.state.selectedSection != prevState.selectedSection) {
+      window.scrollTo(0,0)
     }
   }
 
@@ -15,6 +23,32 @@ export default class Duo extends React.Component {
     this.setState({
       selectedSection: i
     })
+  }
+
+  _handleMarked(sentence) {
+    const section = this.sections[this.state.selectedSection].section
+    var sentences = this.state.markedSentences.get(section) || Immutable.Set([])
+
+    var newSentences = null
+    if(sentences.has(sentence.number)) {
+      newSentences = sentences.delete(sentence.number)
+    } else {
+      newSentences = sentences.add(sentence.number)
+    }
+
+    this.setState({
+      markedSentences: this.state.markedSentences.set(section, newSentences)
+    })
+  }
+
+  _isMarked(sentence) {
+    const section = this.sections[this.state.selectedSection].section
+    const sentences = this.state.markedSentences.get(section)
+    if(sentences && sentences.has(sentence.number)) {
+      return true
+    } else {
+      return false
+    }
   }
 
   _sectionView() {
@@ -29,7 +63,7 @@ export default class Duo extends React.Component {
     const list = this.sections[this.state.selectedSection].sentences.map((s, i) => {
       return (
         <li key={i} className="sentence" >
-          <Sentence sentence={s} />
+          <Sentence sentence={s} marked={this._isMarked(s)} onMarked={this._handleMarked.bind(this)}/>
         </li>
       )
     })
