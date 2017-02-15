@@ -9,7 +9,8 @@ export default class Duo extends React.Component {
     this.sections = jsondata
     this.state = {
       markedSentences: Immutable.Map(),
-      selectedSection: 0
+      selectedSection: 0,
+      isMarkedList: false,
     }
   }
 
@@ -17,6 +18,16 @@ export default class Duo extends React.Component {
     if(this.state.selectedSection != prevState.selectedSection) {
       window.scrollTo(0,0)
     }
+  }
+
+  _handleFilter(isMarkedList) {
+    if(this.state.isMarkedList == isMarkedList) {
+      return
+    }
+
+    this.setState({
+      isMarkedList: isMarkedList
+    })
   }
 
   _handleClick(i) {
@@ -61,9 +72,10 @@ export default class Duo extends React.Component {
 
   _sentenceView() {
     const list = this.sections[this.state.selectedSection].sentences.map((s, i) => {
+      const isMarked = this._isMarked(s)
       return (
-        <li key={i} className="sentence" >
-          <Sentence sentence={s} marked={this._isMarked(s)} onMarked={this._handleMarked.bind(this)}/>
+        <li key={i} className={`sentence ${this.state.isMarkedList && !isMarked ? "hidden" : ""}`} >
+          <Sentence sentence={s} marked={isMarked} onMarked={this._handleMarked.bind(this)}/>
         </li>
       )
     })
@@ -77,10 +89,14 @@ export default class Duo extends React.Component {
           {this._sectionView()}
         </div>
         <div id="section">
-          <div>
+          <div className="header">
             <h1 className="title">Section {this.state.selectedSection + 1}</h1>
-            <ul>{this._sentenceView()}</ul>
+            <div className="actions-l">
+              <button className={this.state.isMarkedList ? "" : "marked"} onClick={() => this._handleFilter(false)}>All</button>
+              <button className={this.state.isMarkedList ? "marked" : ""} onClick={() => this._handleFilter(true)}>Marked</button>
+            </div>
           </div>
+          <ul>{this._sentenceView()}</ul>
         </div>
       </div>
     )
