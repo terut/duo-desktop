@@ -12,16 +12,18 @@ export default class Sentence extends React.Component {
     }
   }
 
-  componentWillReceiveProps(props) {
-    const element = ReactDOM.findDOMNode(this)
-    const audio = element.querySelector('audio')
-    const source = audio.querySelector('source')
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.sentence.number != this.props.sentence.number) {
+      const element = ReactDOM.findDOMNode(this)
+      const audio = element.querySelector('audio')
+      const source = audio.querySelector('source')
 
-    const fileNumber = ("000"+props.sentence.number).slice(-3)
-    source.src = "./assets/sounds/s" + fileNumber + ".m4a"
-    audio.load()
+      const fileNumber = ("000"+nextProps.sentence.number).slice(-3)
+      source.src = "./assets/sounds/s" + fileNumber + ".m4a"
+      audio.load()
 
-    this._handleClear()
+      this._handleClear()
+    }
   }
 
   _handleClear() {
