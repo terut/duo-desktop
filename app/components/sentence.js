@@ -45,6 +45,11 @@ export default class Sentence extends React.Component {
     this.setState({ diff: diff })
 	}
 
+  _handleMarked() {
+    this._handleClear()
+    this.props.onMarked(this.props.sentence)
+  }
+
   _showEn() {
     if(!this.state.diff) {
       return ""
@@ -86,7 +91,7 @@ export default class Sentence extends React.Component {
         <div className="actions">
           <button onClick={() => this._handleCheck()}>Check</button>
           <button onClick={() => this._handleClear()}>Clear</button>
-          <button className={this.props.marked ? "marked" : ""} onClick={() => this.props.onMarked(this.props.sentence)}>Mark</button>
+          <button className={this.props.marked ? "marked" : ""} onClick={() => this._handleMarked()}>Mark</button>
         </div>
       </div>
     )}
