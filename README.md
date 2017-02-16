@@ -15,7 +15,7 @@ Comming Soon..
 $ git clone git@github.com:terut/duo-desktop.git
 $ cd duo-desktop
 $ npm install
-$ mv assets_exmaple assets
+$ cp -r assets_exmaple assets
 $ npm run dev:dist
 $ ./node_modules/.bin/electron .
 ```
