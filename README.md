@@ -14,10 +14,11 @@ Comming Soon..
 ```sh
 $ git clone git@github.com:terut/duo-desktop.git
 $ cd duo-desktop
-$ npm install
+$ yarn install
 $ cp -r assets_exmaple assets
-$ npm run dev:dist
+$ yarn run dev:dist
 $ ./node_modules/.bin/electron .
+
 ```
 
 ## LICENSE
