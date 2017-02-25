@@ -6,7 +6,8 @@
     "dev:dist": "rollup -wm -c build/dev.config.js",
     "build": "rollup -m -c build/dist.config.js",
     "release": "electron-packager . duo --platform=darwin,linux --arch=x64 --ignore='(node_modules|assets_exmaple)' --overwrite",
-    "test:e2e": "mocha test/app_test.js"
+    "test:e2e": "mocha test/app_test.js",
+    "test:es6": "mocha test/es6.js"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",
@@ -14,6 +15,7 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.22.0",
+    "babel-register": "^6.23.0",
     "diff": "^3.2.0",
     "electron": "^1.4.15",
     "electron-packager": "^8.5.1",
